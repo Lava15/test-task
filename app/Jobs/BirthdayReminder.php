@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\BirthdayNotification;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -34,6 +35,5 @@ class BirthdayReminder implements ShouldQueue
         foreach ($users as $user) {
             Mail::to($user->email)->send(new BirthdayNotification($this->contact));
         }
-    }
     }
 }
