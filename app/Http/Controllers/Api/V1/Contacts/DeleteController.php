@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Controllers\Api\V1\Contacts;
+
+use App\Http\Controllers\Controller;
+use App\Models\Contact;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class DeleteController extends Controller
+{
+    public function __invoke(Contact $contact)
+    {
+        if (!$contact) {
+            return response()->json(
+                ['message' => 'Contact not found'],
+                status: Response::HTTP_NOT_FOUND
+            );
+        }
+        $contact->delete();
+
+        return response()->json(['message' => 'Contact deleted successfully']);
+    }
+}
