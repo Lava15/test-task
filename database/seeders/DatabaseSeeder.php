@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 ContactSeeder::class,
                 PhoneNumberSeeder::class,
+                ContactEmailSeeder::class,
             ]);
         } else {
             abort(404);
