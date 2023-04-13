@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
 
         if (app()->environment('local')) {
             $this->call([
-                ContactSeeder::class
+                ContactSeeder::class,
+                PhoneNumberSeeder::class,
             ]);
         } else {
             abort(404);
