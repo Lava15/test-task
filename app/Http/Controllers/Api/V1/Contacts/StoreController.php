@@ -16,6 +16,7 @@ class StoreController extends Controller
     {
         $contact = Contact::query()
             ->create($request->validated());
+
         return response()->json(
             data: ['data' => $contact, 'message' => 'Contact created successfully'],
             status: Response::HTTP_CREATED
