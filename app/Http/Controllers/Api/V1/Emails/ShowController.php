@@ -14,8 +14,7 @@ class ShowController extends Controller
 
     public function __invoke(Contact $contact, ContactEmail $email)
     {
-        $email = $contact->emails()->findOrFail($email);
-
+        $email = $contact->emails()->find($email);
         return response()->json(
             data: ContactEmailResource::collection($email),
             status: Response::HTTP_OK

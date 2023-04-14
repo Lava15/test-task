@@ -3,15 +3,20 @@
 namespace App\Http\Controllers\Api\V1\Emails;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
+use App\Models\ContactEmail;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DeleteController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function __invoke(Contact $contact, ContactEmail $email)
     {
-        //
+        $email = $contact->emails()->find($email);
+        $email->delete();
+        return response()->json(
+            data: ['message' => 'Email deleted successfully'],
+            status: Response::HTTP_NO_CONTENT
+        );
     }
 }

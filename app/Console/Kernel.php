@@ -2,17 +2,21 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CheckBirthdayCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     */
+
+    protected $commands = [
+        CheckBirthdayCommand::class,
+    ];
+
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+//        $schedule->command('check:birthday')->dailyAt('9:00');
+        $schedule->command('check:birthday')->everyMinute();
     }
 
     /**
@@ -20,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class ContactFactory extends Factory
     {
         $fullName = fake()->firstName . ' ' . fake()->name . ' ' . fake()->lastName;
         return [
+            'user_id' => User::factory(),
             'full_name' => $fullName,
             'birthday' => fake()->date('Y_m_d', '-10 year'),
         ];

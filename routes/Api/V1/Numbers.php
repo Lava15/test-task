@@ -11,7 +11,7 @@ Route::prefix('contacts')
     ->as('contact-numbers:')
     ->group(function () {
         Route::get('/{contact}/numbers', IndexController::class)->name('index');
-        Route::get('/{contact}/numbers{number}', ShowController::class)->name('show');
+        Route::get('/{contact}/numbers/{number}', ShowController::class)->name('show');
         Route::post('/{contact}/numbers', StoreController::class)->name('store');
         Route::put('{contact}/numbers/{number}', UpdateController::class)->name('update');
         Route::delete('/{contact}/numbers/{number}', DeleteController::class)->name('delete');
