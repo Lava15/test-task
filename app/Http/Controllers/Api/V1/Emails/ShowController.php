@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ContactEmailResource;
 use App\Models\Contact;
 use App\Models\ContactEmail;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ShowController extends Controller
 {
 
-    public function __invoke(Contact $contact, ContactEmail $email)
+    public function __invoke(Contact $contact, ContactEmail $email): JsonResponse
     {
         $email = $contact->emails()->find($email);
         return response()->json(

@@ -6,20 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactPhoneRequest;
 use App\Models\Contact;
 use App\Models\PhoneNumber;
+use App\Responses\ApiErrorResponse;
+use App\Responses\ApiSuccessResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class UpdateController extends Controller
 {
-    public function __invoke(ContactPhoneRequest $request, Contact $contact, PhoneNumber $number)
+    public function __invoke(ContactPhoneRequest $request, Contact $contact, PhoneNumber $number): ApiSuccessResponse|ApiErrorResponse
     {
-        $number = $contact->phoneNumbers()->find($number);
 
-        $number->query()->update($request->validated());
-
-        return response()->json(
-            data: ['data' => $number, 'message' => 'Email updated successfully'],
-            status: Response::HTTP_CREATED
+        try {
+            $phoneNumber = $contact->phoneNumbers()->find($number);
+            $phoneNumber->query()->update($request->validated());
+        } catch (Throwable $e) {
+            return new ApiErrorResponse(
+                e: $e,
+                message: 'Failed to update a phone number',
+            );
+        }
+        return new ApiSuccessResponse(
+            data: $phoneNumber,
+            message: ['success' => 'New phone number updated successfully'],
+            statusCode: Response::HTTP_CREATED
         );
     }
 }

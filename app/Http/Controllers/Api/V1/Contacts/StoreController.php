@@ -6,20 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
+use App\Responses\ApiErrorResponse;
+use App\Responses\ApiSuccessResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class StoreController extends Controller
 {
-    public function __invoke(ContactRequest $request): JsonResponse
+    public function __invoke(ContactRequest $request): ApiSuccessResponse|ApiErrorResponse
     {
-        $contact = Contact::query()
-            ->create($request->validated());
+        try {
+            $contact = Contact::query()
+                ->create($request->validated());
+        } catch (Throwable $e) {
+            return new ApiErrorResponse(
+                e: $e,
+                message: 'Failed to create a contact',
+            );
+        }
 
-        return response()->json(
-            data: ['data' => $contact, 'message' => 'Contact created successfully'],
-            status: Response::HTTP_CREATED
+        return new ApiSuccessResponse(
+            data: $contact,
+            message: ['success' => 'Contact created successfully'],
+            statusCode: Response::HTTP_CREATED
         );
 
     }

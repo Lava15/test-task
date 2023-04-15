@@ -13,6 +13,7 @@ class ShowController extends Controller
     public function __invoke(Contact $contact)
     {
         $contact = Contact::query()->find($contact)->load(['emails', 'phoneNumbers']);
+
         return response()->json(['data' => ContactResource::collection($contact)]);
     }
 }

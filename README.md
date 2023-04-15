@@ -72,6 +72,10 @@ clean the database by running the following command
 
 ./vendor/bin/sail artisan queue:work
 
+## E-mail Service Mailpit
+
+In order to use local mail service use port:8025
+
 ## Folders
 
 - `app` - Contains all the Eloquent models
