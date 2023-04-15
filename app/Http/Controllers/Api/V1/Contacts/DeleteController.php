@@ -11,12 +11,6 @@ class DeleteController extends Controller
 {
     public function __invoke(Contact $contact)
     {
-        if (!$contact) {
-            return response()->json(
-                ['message' => 'Contact not found'],
-                status: Response::HTTP_NOT_FOUND
-            );
-        }
         $contact->delete();
 
         return response()->json(['message' => 'Contact deleted successfully']);

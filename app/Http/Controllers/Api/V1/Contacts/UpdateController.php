@@ -17,17 +17,9 @@ class UpdateController extends Controller
      */
     public function __invoke(ContactRequest $request, Contact $contact): JsonResponse
     {
-        if (!$contact) {
-            return response()->json(
-                ['message' => 'Contact not found'],
-                status: Response::HTTP_NOT_FOUND
-            );
-        }
-
         $contact->update($request->validated());
-
         return response()->json([
-            'data' => ContactResource::collection($contact),
+            'data' => $contact,
             'message' => 'Contact updated successfully'
         ]);
     }

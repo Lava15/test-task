@@ -13,7 +13,7 @@ class DeleteController extends Controller
     public function __invoke(Contact $contact, PhoneNumber $number)
     {
         $number = $contact->phoneNumbers()->find($number);
-        $number->delete();
+        $number->each->delete();
         return response()->json(
             data: ['message' => 'Email deleted successfully'],
             status: Response::HTTP_NO_CONTENT

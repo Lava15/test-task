@@ -13,7 +13,8 @@ class DeleteController extends Controller
     public function __invoke(Contact $contact, ContactEmail $email)
     {
         $email = $contact->emails()->find($email);
-        $email->delete();
+        $email->each->delete();
+//        dd($email);
         return response()->json(
             data: ['message' => 'Email deleted successfully'],
             status: Response::HTTP_NO_CONTENT

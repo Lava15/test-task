@@ -13,12 +13,6 @@ class ShowController extends Controller
     public function __invoke(Contact $contact)
     {
         $contact = Contact::query()->find($contact)->load(['emails', 'phoneNumbers']);
-        if (!$contact) {
-            return response()->json(
-                ['message' => 'Contact not found'],
-                status: Response::HTTP_NOT_FOUND);
-        }
-
         return response()->json(['data' => ContactResource::collection($contact)]);
     }
 }

@@ -15,7 +15,7 @@ class UpdateController extends Controller
     {
         $email = $contact->emails()->find($email);
 
-        $email->query()->update($request->validated());
+        $email->query()->each->update($request->validated());
 
         return response()->json(
             data: ['data' => $email, 'message' => 'Email updated successfully'],
