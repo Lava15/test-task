@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\User;
+use App\Notifications\BirthdayEmail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +22,9 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
-require __DIR__.'/auth.php';
+Route::get('/test', function () {
+
+
+});
+
+require __DIR__ . '/auth.php';

@@ -20,7 +20,7 @@ class BirthdayReminder implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(protected Contact $contact)
+    public function __construct(protected $user)
     {
         //
     }
@@ -30,10 +30,16 @@ class BirthdayReminder implements ShouldQueue
      */
     public function handle(): void
     {
-        $users = User::all();
-
-        foreach ($users as $user) {
-            Mail::to($user->email)->send(new BirthdayNotification($this->contact));
+        $contacts = $this->user->contacts()->whereDate('birthday', today())->get();
+        $reveiverMail = $this->user['email'];
+        if ($contacts->count() > 0) {
+            foreach ($contacts as $contact) {
+                Mail::raw("Today is birthday of $contact->full_name", function ($message) use ($reveiverMail) {
+                    $message->from(env('ADMIN_EMAIL'), env('APP_NAME'));
+                    $message->to($reveiverMail);
+                    $message->subject('Nicesnippets.com');
+                });
+        }
         }
     }
 }
