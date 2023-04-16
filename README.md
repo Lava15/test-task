@@ -45,6 +45,11 @@ Run the database migrations
 
 You can now access the server at http://localhost:{'YOUR-PORT'}
 
+***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to
+clean the database by running the following command
+
+    ./vendor/bin/sail artisan migrate:refresh
+
 ## Database seeding
 
 **Populate the database with seed data with relationships which includes users, articles, comments, tags, favorites and
@@ -54,11 +59,6 @@ follows. This can help you to quickly start testing the api or couple a frontend
 Run the database seeder and you're done
 
     ./vendor/bin/sail artisan db:seed
-
-***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to
-clean the database by running the following command
-
-    ./vendor/bin/sail artisan migrate:refresh
 
 ## Launch crone Job. In order to start automated tasks
 

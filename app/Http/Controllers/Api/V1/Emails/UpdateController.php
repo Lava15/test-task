@@ -18,17 +18,13 @@ class UpdateController extends Controller
     public function __invoke(ContactEmailRequest $request, Contact $contact, ContactEmail $email): ApiSuccessResponse|ApiErrorResponse
     {
         try {
-            $email = $contact->emails()->find($email);
-            $email->query()->each->update($request->validated());
+            $email->update($request->validated());
         } catch (Throwable $e) {
             return new ApiErrorResponse(
                 e: $e,
                 message: 'Failed to update an e-mail',
             );
         }
-        $email = $contact->emails()->find($email);
-        $email->query()->update($request->validated());
-
         return new ApiSuccessResponse(
             data: $email,
             message: ['success' => 'Email updated successfully'],

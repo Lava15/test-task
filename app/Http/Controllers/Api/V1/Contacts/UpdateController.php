@@ -21,7 +21,9 @@ class UpdateController extends Controller
     public function __invoke(ContactRequest $request, Contact $contact): ApiSuccessResponse|ApiErrorResponse
     {
         try {
-            $contact->update($request->validated());
+            $contact->update($request->validated() + [
+                    'user_id' => auth()->id()
+                ]);
         } catch (Throwable $e) {
             return new ApiErrorResponse(
                 e: $e,

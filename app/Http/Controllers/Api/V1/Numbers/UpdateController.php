@@ -19,8 +19,7 @@ class UpdateController extends Controller
     {
 
         try {
-            $phoneNumber = $contact->phoneNumbers()->find($number);
-            $phoneNumber->query()->update($request->validated());
+            $number->update($request->validated());
         } catch (Throwable $e) {
             return new ApiErrorResponse(
                 e: $e,
@@ -28,7 +27,7 @@ class UpdateController extends Controller
             );
         }
         return new ApiSuccessResponse(
-            data: $phoneNumber,
+            data: $number,
             message: ['success' => 'New phone number updated successfully'],
             statusCode: Response::HTTP_CREATED
         );

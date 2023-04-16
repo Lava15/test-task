@@ -19,7 +19,9 @@ class StoreController extends Controller
     {
         try {
             $contact = Contact::query()
-                ->create($request->validated());
+                ->create($request->validated() + [
+                        'user_id' => auth()->id()
+                    ]);
         } catch (Throwable $e) {
             return new ApiErrorResponse(
                 e: $e,

@@ -17,7 +17,6 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required'],
             'full_name' => ['required', 'string', 'min:5', 'max:255', Rule::unique(Contact::class, 'full_name')],
             'birthday' => ['required', 'date:d/m/Y'],
         ];
