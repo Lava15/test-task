@@ -29,6 +29,8 @@ Start the local development with DOCKER with detached mode
 
     ./vendor/bin/sail build --no-cache && sail up -d
 
+You can now access the server at http://localhost:{'YOUR-PORT'}
+
 Generate a new application key
 
     ./vendor/bin/sail artisan key:generate
@@ -43,8 +45,6 @@ Run the database migrations
 
     ./vendor/bin/sail artisan migrate
 
-You can now access the server at http://localhost:{'YOUR-PORT'}
-
 ***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to
 clean the database by running the following command
 
@@ -52,7 +52,7 @@ clean the database by running the following command
 
 ## Database seeding
 
-**Populate the database with seed data with relationships which includes users, articles, comments, tags, favorites and
+**Populate the database with seed data with relationships which includes users, contacts, emails, phone number,  and
 follows. This can help you to quickly start testing the api or couple a frontend and start using it with ready content.
 **
 
