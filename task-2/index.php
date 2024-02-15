@@ -45,6 +45,14 @@ class ABTest
 
     public function trackTemplateCount($templateId)
     {
+
+        /**
+         * Подсчитываем количество просмотров
+         * Здесь можно добавить условие если пользователь прошел регистрацию, то подсчитываем количество просмотров
+         *  isset($_SESSION['is_registered']) && $_SESSION['is_registered'] - пример
+         */
+
+
         $_SESSION['template_counts'][$templateId]++;
         /**
          * Проверяем, если общее количество просмотров больше или равно TOTAL_VIEWS_THRESHOLD, то выводим результат
