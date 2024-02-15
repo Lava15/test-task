@@ -40,7 +40,7 @@ while (true) {
         break;
     }
 
-    // Process the posts for the current batch
+    // Вывод ID
     foreach ($posts_ids as $id) {
         echo $id . '<br>';
     }
